@@ -1,0 +1,89 @@
+/* Main Styles */
+body {
+    background-color: #f8f9fa;
+}
+
+/* Task Cards */
+.task-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 1rem;
+}
+
+.task-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+}
+
+.task-card .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.task-card.completed .card-header {
+    background-color: rgba(40, 167, 69, 0.1);
+}
+
+.task-card.completed .card-title {
+    text-decoration: line-through;
+    color: #6c757d;
+}
+
+.task-card .task-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.task-card .task-image {
+    max-height: 150px;
+    object-fit: cover;
+}
+
+/* Quotes */
+#quote-container {
+    min-height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#quote-content {
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+#quote-author {
+    font-size: 0.85rem;
+}
+
+/* Auth Modals */
+.modal-footer a {
+    cursor: pointer;
+}
+
+/* Loading Spinner */
+.spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+}
+
+/* Admin Page */
+.user-role-badge {
+    font-size: 0.8rem;
+    padding: 0.25rem 0.5rem;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .task-card .task-actions {
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+    
+    .task-card .btn {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.875rem;
+    }
+} 

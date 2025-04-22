@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% block title %}My Profile{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col">
+        <h2>My Profile</h2>
+        <p class="text-muted">Manage your account and preferences</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6 mb-4">
+        <div class="card shadow-sm">
+            <div class="card-header bg-light">
+                <h5 class="card-title mb-0">Account Information</h5>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    <input type="text" class="form-control" id="userEmail" readonly>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Account Type</label>
+                    <input type="text" class="form-control" id="userRole" readonly>
+                </div>
+                <div id="profile-error" class="alert alert-danger d-none"></div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6 mb-4">
+        <div class="card shadow-sm">
+            <div class="card-header bg-light">
+                <h5 class="card-title mb-0">Task Statistics</h5>
+            </div>
+            <div class="card-body">
+                <div class="d-flex justify-content-between mb-3">
+                    <div class="text-center p-3 bg-light rounded">
+                        <h3 id="total-user-tasks">0</h3>
+                        <small class="text-muted">Total Tasks</small>
+                    </div>
+                    <div class="text-center p-3 bg-light rounded">
+                        <h3 id="pending-user-tasks">0</h3>
+                        <small class="text-muted">Pending</small>
+                    </div>
+                    <div class="text-center p-3 bg-light rounded">
+                        <h3 id="completed-user-tasks">0</h3>
+                        <small class="text-muted">Completed</small>
+                    </div>
+                </div>
+                
+                <div class="mt-4">
+                    <h6>Category Distribution</h6>
+                    <div id="category-chart" class="p-3" style="height: 200px;">
+                        <!-- Category chart will be rendered here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card shadow-sm">
+            <div class="card-header bg-light d-flex justify-content-between align-items-center">
+                <h5 class="card-title mb-0">Task History</h5>
+                <div class="d-flex">
+                    <select id="historyFilter" class="form-select form-select-sm me-2">
+                        <option value="all">All Tasks</option>
+                        <option value="completed">Completed</option>
+                        <option value="pending">Pending</option>
+                    </select>
+                    <input type="text" id="searchHistory" class="form-control form-control-sm" placeholder="Search...">
+                </div>
+            </div>
+            <div class="card-body">
+                <ul class="list-group" id="task-history-list">
+                    <!-- Task history will be loaded here -->
+                </ul>
+                <div id="no-history" class="text-center py-3 d-none">
+                    <p class="text-muted">No task history found.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{{ url_for('static', filename='js/profile.js') }}"></script>
+{% endblock %} 

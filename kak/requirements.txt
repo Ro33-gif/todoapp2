@@ -1,0 +1,14 @@
+# Flask web framework for building the web application
+flask==2.0.1
+# Firebase Admin SDK for integrating with Firebase services
+firebase-admin==5.0.3
+# Library for loading environment variables from .env files
+python-dotenv==0.19.1
+# Library for making HTTP requests to external APIs
+requests==2.26.0
+# WSGI utility library for Flask
+Werkzeug==2.0.1
+# Production WSGI HTTP server for running the web app
+gunicorn==20.1.0
+# Python Imaging Library for image processing
+Pillow==8.3.2 

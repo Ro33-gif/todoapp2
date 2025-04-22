@@ -1,0 +1,154 @@
+{% extends 'base.html' %}
+
+{% block title %}Admin Panel{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col">
+        <h2>Admin Panel</h2>
+        <p class="text-muted">Manage users and system tasks</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 mb-4">
+        <div class="card shadow-sm">
+            <div class="card-header bg-light d-flex justify-content-between align-items-center">
+                <h5 class="card-title mb-0">User Management</h5>
+                <div>
+                    <input type="text" id="searchUsers" class="form-control form-control-sm" placeholder="Search users...">
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Email</th>
+                                <th>Access Type</th>
+                                <th>Tasks</th>
+                                <th>Last Active</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="users-table-body">
+                            <!-- Users will be loaded here dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+                <div id="no-users-message" class="text-center py-3 d-none">
+                    <p class="text-muted">No users found.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card shadow-sm">
+            <div class="card-header bg-light d-flex justify-content-between align-items-center">
+                <h5 class="card-title mb-0">All Tasks</h5>
+                <div class="d-flex">
+                    <select id="categoryFilterAdmin" class="form-select form-select-sm me-2">
+                        <option value="all">All Categories</option>
+                        <option value="work">Work</option>
+                        <option value="school">School</option>
+                        <option value="home">Home</option>
+                        <option value="health">Health & Fitness</option>
+                        <option value="finance">Finance</option>
+                        <option value="personal">Personal Development</option>
+                        <option value="shopping">Shopping</option>
+                        <option value="family">Family</option>
+                        <option value="travel">Travel</option>
+                        <option value="social">Social</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <input type="text" id="searchAllTasks" class="form-control form-control-sm" placeholder="Search tasks...">
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>User</th>
+                                <th>Category</th>
+                                <th>Status</th>
+                                <th>Created</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="all-tasks-table-body">
+                            <!-- Tasks will be loaded here dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+                <div id="no-all-tasks-message" class="text-center py-3 d-none">
+                    <p class="text-muted">No tasks found.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- User Edit Modal -->
+<div class="modal fade" id="editUserModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit User</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editUserForm">
+                    <input type="hidden" id="editUserId">
+                    <div class="mb-3">
+                        <label for="editUserEmail" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="editUserEmail" readonly>
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="editUserIsAdmin">
+                        <label class="form-check-label" for="editUserIsAdmin">Admin Access</label>
+                    </div>
+                    <div id="edit-user-error" class="alert alert-danger d-none"></div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" id="saveUserEdit" class="btn btn-primary">Save Changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete User Confirmation Modal -->
+<div class="modal fade" id="deleteUserModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Delete User</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-danger">
+                    <h6 class="alert-heading">Warning!</h6>
+                    <p>This action will permanently delete the user account and all their data. This cannot be undone.</p>
+                </div>
+                <p>Are you sure you want to delete the user <strong id="deleteUserEmail"></strong>?</p>
+                <input type="hidden" id="deleteUserId">
+                <div id="delete-user-error" class="alert alert-danger d-none"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" id="confirmDeleteUser" class="btn btn-danger">Delete User</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+{% endblock %} 

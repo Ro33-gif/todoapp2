@@ -1,0 +1,117 @@
+# Todo App - Project Overview
+
+## Project Architecture
+This is a Flask-based Todo application with Firebase as the backend database. The application follows a typical MVC (Model-View-Controller) architecture:
+
+- **Frontend**: HTML/CSS/JavaScript with Bootstrap for styling
+- **Backend**: Python Flask framework
+- **Database**: Firebase Firestore
+- **Authentication**: Firebase Authentication
+
+## Key Components
+
+### Backend Framework
+- **Flask**: Python web framework that handles HTTP requests, routing, and renders templates
+- **Blueprint System**: The app uses Flask blueprints to organize routes:
+  - `main_bp`: Main routes for home page and general navigation
+  - `auth_bp`: Authentication routes for user login, signup, and profile management
+  - `tasks_bp`: Routes for task management (create, read, update, delete)
+
+### Database 
+- **Firebase Firestore**: NoSQL cloud database for storing:
+  - User data (authentication information, profiles)
+  - Task data (title, description, status, due date, etc.)
+  - Document-based structure with collections for 'users' and 'tasks'
+
+### Authentication System
+- **Firebase Authentication**: Handles user authentication
+- Features include:
+  - User registration and login
+  - Profile management
+  - Session management
+
+### Task Management Features
+- **CRUD Operations**:
+  - Create new tasks with title, description, category, urgency, due date and optional image
+  - Read/view all tasks with filtering options
+  - Update existing tasks
+  - Delete tasks
+- **Task Properties**:
+  - Title and description
+  - Status (pending/completed)
+  - Category
+  - Urgency/priority levels
+  - Due date
+  - Optional image attachment
+
+### Frontend Components
+- **Templates**: HTML templates using Jinja2 templating engine
+  - Base template with common UI elements
+  - Task listing view
+  - Modal forms for task creation/editing
+  - Profile page
+  - Admin interface
+- **JavaScript**: Client-side functionality for dynamic user interactions
+  - Task filtering and sorting
+  - Form validation
+  - AJAX calls to backend APIs
+  - UI updates without page refresh
+- **CSS/Bootstrap**: Responsive design and styling
+
+## Project Structure
+```
+├── app.py                 # Application entry point
+├── requirements.txt       # Python dependencies
+├── .env.example           # Environment variables template
+├── firebase-key.json      # Firebase credentials
+├── app/                   # Main application package
+│   ├── __init__.py        # Application factory and configuration
+│   ├── routes/            # Route blueprints
+│   │   ├── main.py        # Main routes
+│   │   ├── auth.py        # Authentication routes
+│   │   └── tasks.py       # Task management routes
+│   ├── templates/         # HTML templates
+│   │   ├── base.html      # Base template
+│   │   ├── index.html     # Home page
+│   │   ├── profile.html   # User profile
+│   │   ├── admin.html     # Admin interface
+│   │   └── modals/        # Modal components
+│   └── static/            # Static assets
+│       ├── css/           # Stylesheets
+│       ├── js/            # JavaScript files
+│       │   └── tasks.js   # Task management functionality
+│       └── img/           # Images
+```
+
+## Key Features
+1. **User Authentication**:
+   - Register and login functionality
+   - Profile management
+   - Password reset capabilities
+
+2. **Task Management**:
+   - Create, view, edit, and delete tasks
+   - Mark tasks as complete/incomplete
+   - Add images to tasks
+   - Set due dates, categories, and urgency levels
+
+3. **Search and Filter**:
+   - Filter tasks by status (pending/completed)
+   - Filter by category and urgency
+   - Search tasks by title or description
+
+4. **Responsive UI**:
+   - Bootstrap-based responsive design
+   - Accessible on mobile and desktop
+
+## Technical Dependencies
+- Flask 2.0.1
+- Firebase Admin SDK 5.0.3
+- Python-dotenv 0.19.1
+- Requests 2.26.0
+- Werkzeug 2.0.1
+- Gunicorn 20.1.0 (for production deployment)
+- Pillow 8.3.2 (for image processing)
+
+## Deployment Information
+The application can be deployed using Gunicorn as a WSGI HTTP server in production environments. Environment variables should be configured properly using a .env file based on the provided .env.example template. 
